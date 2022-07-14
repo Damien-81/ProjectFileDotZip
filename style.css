@@ -1,0 +1,139 @@
+@media ( max-width: 3000px){
+    #map{
+
+        width: 750px;
+        height: 750px;
+    }
+}
+@media ( max-width: 1000px){
+    #map{
+        width: 450px;
+        height: 450px;
+    }
+}
+
+@media ( max-width: 800px){
+    #map{
+        width: 400px;
+        height: 400px;
+    }
+}
+
+@media ( max-width: 500px){
+    #map{
+        width: 300px;
+        height: 300px;
+    }
+}
+
+@media ( max-width: 300px){
+    #map{
+        width: 200px;
+        height: 200px;
+    }
+}
+html, body{ 
+    font-family: 'Open Sans', sans-serif;
+    background-color: white; 
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+header{
+    background:#084a83;
+    width: 100%;
+}
+.header-title{
+    color: #ffffe7; 
+}
+.menu{
+    background-color: #539ddb;
+}
+.nav-link{
+    color: #ffffe7;
+}
+li.selected a {
+    background-color: red;
+    color: red;
+}
+[aria-current]:not([aria-current="false"]) {    
+    font-weight: bold;
+}
+.container{
+    background-color: #f3f8fd;
+}
+section{
+    margin-top: 5%;
+}
+article {
+    display: block; 
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+img{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.img-responsive{
+    max-width: 100%;
+    height: auto; 
+    display: block;
+}
+.text-center{
+    color: #ffffe7;
+    text-decoration: none; 
+}
+footer{
+    margin-top: 5%;
+    position: relative;
+    width: 100%; 
+    height: 50px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #ffffe7;
+}
+.footer-color-link{
+    color: rgb(34, 82, 145);
+    text-decoration: none;
+}
+.footer-head{
+    background: #539ddb;
+    color: #ffffe7;
+}
+.h1-footer{
+    padding-bottom:4%;
+}
+.footer-icon{
+    display: inline;
+    width: 30px;
+    height: 30px;
+    margin-top: 1%;
+    margin-right: 3%;
+}
+.footer-icon:hover{
+    border: 1px solid #084a83;
+    color: black;
+}
+.footer-head ul-footer{
+    background-color:#539ddb;
+}
+.footer-head-p{
+    color: rgb(34, 82, 145);
+}
+.footer{
+    background-color: #084a83;   
+    color: #ffffe7;
+}
+.footer1{
+    color: #539edb;
+    text-decoration: none;
+    font-weight:bold;
+}
+
+select.gras {
+    font-weight:bold;
+  }

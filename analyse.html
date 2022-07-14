@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!--Titre du site (onglet en haut)-->
+    <title>SVS | Analyste</title>
+    <!--Définition du format d'encodage de caractère du site-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!--Responsive-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Google FONT-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap.min.js"></script>
+    <!--Style css-->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Jquery -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <!-- script JS-->
+    <script src="js/analyse.js"></script>
+    <script src="js/graphAnalyse.js"></script>
+    <!--Leaflet-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+    <!--ChartJS-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+</head>
+
+<body>
+    <header>
+        <!--En tête-->
+        <div class="p-4 container-fluid">
+            <!--Titre du site de hauteur p-4, prend toute le largeur-->
+            <a class="text-center" href="index.html">
+                <h1>Système Véhicule Supervision</h1>
+            </a>
+        </div>
+        <nav class="menu navbar-nav navbar-expand-md">
+            <!--jusqu'a "medium"(768x) sa affiche le menu normal, en dessous le menu responsive-->
+            <!--Menu-->
+            <div class="container-fluid">
+                <!--on veut que le contenu du container prenne toute la largeur-->
+                <button class="navbar-toggler active" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"><img src="img/icon-menu-responsive.png" class="img-fluid"
+                            alt="Icon-Menu-Responsive" /></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!--collapse permet de cacher les éléments du menu qui seront afficher lors du click sur le bouton (tooggle collapse) en responsive-->
+                    <ul class="navbar-nav me-auto nav-tabs">
+                        <!--liste d'éléments non ordonnées avec me-auto pour fixer à gauche-->
+                        <li class="nav-item">
+                            <!--élément dans une liste--><a class="nav-link" href="index.html">Accueil</a></li>
+                        <li class="nav-item"><a class="nav-link" href="suivis.html">Suivis en temps réel</a></li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto nav-tabs">
+                        <!--liste d'éléments non ordonnées avec ms-auto pour fixer à droite-->
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="analyse.html">Analyse
+                                Parcours</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <!--Main-->
+        <div class="container rounded-top rounded-bottom">
+            <!--le container ne prend pas toute la largeur, et on arrondi les angles.-->
+            <section>
+                <article>
+                    <h2>Bienvenue sur la page Analyse site web du SVS.</h2>
+                    </br>
+                    <p>Grâce à cette page, vous allez pouvoir analyser les différentes données du parcours en détail,
+                        grâce notamment aux graphiques.</p>
+                    <p>Sur cette page, vous allez pouvoir aussi exporter les données de la BDD et choisir si vous
+                        souhaitez exporter des données spécifiques.</p>
+                </article>
+            </section>
+        </div>
+        <div class="container rounded-top rounded-bottom">
+            <!--le container ne prend pas toute la largeur, et on arrondi les angles.-->
+            <section>
+                <article>
+                        <div class="container border">
+                            <h2>Formulaire de graphiques d'exportation:</h2>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th><select class="gras" name="choixManif" id="choixManif" onchange="selectAnnee()"><option>Choix Manifestation</option></select></th>
+                                        <th><select class="gras" name="choixAnnee" id="choixAnnee"onchange="selectVehicule()"><option>Choix Année</option></select></th>
+                                        <th><select class="gras" name="choixVehicule" id="choixVehicule"><option>Choix Véhicule</option></select></th>
+                                    </tr>
+                                    
+                                </table>
+                            </div>
+                        </div>
+                </article>
+            </section>
+        </div>
+        <div class="container rounded-top rounded-bottom">
+            <!--le container ne prend pas toute la largeur, et on arrondi les angles.-->
+            <section>
+                <article>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <canvas id="line-chart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>     
+                    </div>
+                </article>
+                <article>
+                    <div name="AfficherCacher" id="button" class="input-row" style="display:none">
+                        <button class="btn btn-primary" onclick="getChart()">Afficher le graphique</button>
+                    </div>
+                </article>
+            </section>
+        </div>
+        <div class="container rounded-top rounded-bottom">
+            <!--le container ne prend pas toute la largeur, et on arrondi les angles.-->
+            <section>
+                <article>
+                        <div name="AfficherCacher" id="buttonCsv" class="input-row" style="display:none">
+                            <label class="col-md-4 control-label">Exporter la base de données au format CSV</label>
+                            <br>
+                            <div class="d-flex justify-content-center">
+                                <button id="submit" name="submit" type="submit" onclick="liercsv()" class="btn-submit col-lg-3 ">Télécharger le CSV</button>
+                                <!--largeur du bouton a lg-3-->
+                            </div>
+                        </div>
+                </article>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <!--Pieds de page-->
+        <div class="footer-head container-fluid p-5">
+            <!--Prend toute la largeur, et a une hauteur de p-5-->
+            <div class="row">
+                <!--Ligne de grille-->
+                <div class="col-5">
+                    <!--Largeur de la colonne a -5-->
+                    <h5 class="h1-footer text-uppercase mb-0">Système Véhicule Supervision</h5>
+                    <!--Titre en majuscule, et Espace en dessous du titre à mb-0-->
+                    <p>La page "<a href="index.html" class="footer-head-p text-center">Accueil</a>" présente les différentes fonctionnalités du site SVS.
+                    Vous pouvez suivre les véhicules en course en temps réel grâce à la page "<a href="suivis.html" class="footer-head-p text-center">Suivis en temps réel</a>".
+                    Vous pouvez également consulter les différents graphiques détaillés des courses grâce à la page "<a href="analyse.html" class="footer-head-p text-center">Analyse</a>".</p>
+
+                </div>
+                <div class="col">
+                    <!--Colonne à largeur automatique-->
+                    <h5 class="h1-footer text-uppercase mb-1">Liens utiles</h5>
+                    <!--Titre en majuscule, et Espace en dessous du titre à mb-1-->
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.circuit-albi.fr/" class="footer-color-link">Site du circuit</a></li>
+                        <li><a href="https://fr.wikipedia.org/wiki/Circuit_d%27Albi" class="footer-color-link">Page
+                                Wikipedia du Circuit</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <!--Colonne à largeur automatique-->
+                    <h5 class="h1-footer text-uppercase mb-1">Liens utiles</h5>
+                    <!--Titre en majuscule, et Espace en dessous du titre à mb-1-->
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.mairie-albi.fr/" class="footer-color-link">Mairie</a></li>
+                        <li><a href="http://www.rascol.net/" class="footer-color-link">Site web du lycée Rascol</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <!--Colonne à largeur automatique-->
+                    <h5 class="h1-footer text-uppercase mb-3">Réseaux sociaux</h5>
+                    <!--Titre en majuscule, et Espace en dessous du titre à mb-3-->
+                    <ul class="ul-footer list-unstyled">
+                        <a href="https://www.facebook.com/albicircuit/"><img src="img/facebook-icon.png"
+                                class="footer-icon"></a>
+                        <a href="https://twitter.com/AlbiCircuit"><img src="img/twitter-icon.png"
+                                class="footer-icon"></a>
+                        <a href="https://www.youtube.com/channel/UC90ss5ae1C5xIGV9w_yHGJA"><img
+                                src="img/youtube-icon.png" class="footer-icon"></a>
+                        <a href="https://www.instagram.com/albicircuit/"><img src="img/instagram-icon.png"
+                                class="footer-icon"></a>
+                        <a href="https://www.flickr.com/photos/153040147@N06/albums"><img src="img/flickr-icon.png"
+                                class="footer-icon"></a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer container-fluid text-center p-4">
+            <!--Prend toute la largeur, hauteur a p-4-->
+            © 2021 Copyright:
+            <a class="footer1" href="index.html">Système Véhicule Supervision.</a>
+        </div>
+    </footer>
+</body>
+
+</html>

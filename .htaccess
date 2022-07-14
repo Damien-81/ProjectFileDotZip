@@ -1,0 +1,12 @@
+AuthUserFile "D:\wamp64\www\2021_SVS_Exploitation_des_données\.htpasswd"
+Allow from all
+AuthName "Connexion analyste"
+AuthType Basic
+<Files analyse.html>
+	require valid-user
+</Files>	
+ErrorDocument 401 <script>document.location.href="Erreur.php"</script>
+ErrorDocument 402 <script>document.location.href="Erreur.php"</script>
+ErrorDocument 403 <script>document.location.href="Erreur.php"</script>
+ErrorDocument 404 <script>document.location.href="Erreur.php"</script>
+ErrorDocument 500 <script>document.location.href="Erreur.php"</script>
